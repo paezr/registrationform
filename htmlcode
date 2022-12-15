@@ -1,0 +1,274 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="Assignment2.WebForm1" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="StyleSheet1.css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div>
+            <asp:Label ID="lblHeading" runat="server" Text="PATIENT REGISTRATION FORM"/>
+        </div>
+
+        <div class="box1">
+            <asp:Label runat="server" Text="PATIENT INFORMATION: (Please use full legal name, no nicknames)"/>
+            <div class="margin_top">
+                <asp:Label runat="server" Text="Last Name: "/>
+                <asp:TextBox ID="txtLastName" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validateLastName" runat="server" ControlToValidate="txtLastName" CssClass="errorVal" ErrorMessage="Please enter last name"></asp:RequiredFieldValidator>
+                
+                <asp:Label runat="server" Text="First Name: "/>
+                <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validateFirstName" runat="server" ControlToValidate="txtFirstName" CssClass="errorVal" ErrorMessage="Please enter first name"></asp:RequiredFieldValidator>            
+            
+                <asp:Label runat="server" Text="Middle Initial: " />
+                <asp:TextBox ID="txtMiddleInitial" runat="server"></asp:TextBox>
+            </div>
+
+            <div class="margin_top">
+                <asp:Label runat="server" Text="Address: "/>
+                <asp:TextBox ID="txtAddress" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="validatorAddress" runat="server" ControlToValidate="txtAddress" CssClass="errorVal" ErrorMessage="Please enter address"></asp:RequiredFieldValidator>            
+            
+                <asp:Label runat="server" Text="City: "/>
+                <asp:TextBox ID="txtCity" runat="server"></asp:TextBox>
+
+                <asp:Label runat="server" Text="State: " style="margin-left:30px"/>
+                <asp:TextBox ID="txtState" runat="server"></asp:TextBox>
+
+                <asp:Label runat="server" Text="Zip: "/>
+                <asp:TextBox ID="txtZip" runat="server"></asp:TextBox>
+
+
+            </div>
+
+            <div class="margin_top">
+                <asp:Label runat="server" Text="Home Phone #: "/>
+                <asp:TextBox ID="txtHomePhone" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="regValidatorHomePhone" runat="server" ErrorMessage="Invalid Phone Number" ControlToValidate="txtHomePhone" CssClass="errorVal" ValidationExpression="d{3}-d{3}-d{4}"></asp:RegularExpressionValidator>
+            
+                <asp:Label runat="server" Text="Social Security #: "/>
+                <asp:TextBox ID="txtSocial" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="regValidatorSocialNum" runat="server" ErrorMessage="Invalid Social Number" ControlToValidate="txtSocial" CssClass="errorVal" ValidationExpression="d{3}-d{2}-d{4}"></asp:RegularExpressionValidator>
+                
+            </div>
+
+            <div class="margin_top">
+                <asp:Label Text="Date of Birth: " runat="server"/>
+                <asp:TextBox ID="txtBirth" runat="server" TextMode="Date" ValidationGroup="sub"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="txtBirth" Display="Dynamic" ErrorMessage="Please enter date" CssClass="errorVal"></asp:RequiredFieldValidator>
+                <asp:CustomValidator ID="CustomValidator1" runat="server" ControlToValidate="txtBirth" Display="Dynamic" ErrorMessage="Invalid Date" CssClass="errorVal" OnServerValidate="CustomValidator1_ServerValidate" CausesValidation="True"></asp:CustomValidator>
+
+                <asp:Label Text="Age: " runat="server"/>
+                <asp:TextBox ID="txtAge" runat="server"></asp:TextBox>
+
+                <asp:Label Text="Sex: " runat="server"/>
+                <asp:DropDownList ID="ddlSex" runat="server">
+                    <asp:ListItem>-</asp:ListItem>
+                    <asp:ListItem>M</asp:ListItem>
+                    <asp:ListItem>F</asp:ListItem>
+                    </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="fieldValidatorSex" runat="server" ControlToValidate="ddlSex" CssClass="errorVal" ErrorMessage="Please enter sex" InitialValue="-"></asp:RequiredFieldValidator>            
+            </div>
+
+            <div class="margin_top">
+
+                <asp:Label ID="Label1" runat="server" Text="Marital Status: "></asp:Label>
+                <asp:DropDownList ID="DropDownList1" runat="server" >
+                    <asp:ListItem>------</asp:ListItem>
+                    <asp:ListItem>Single</asp:ListItem>
+                    <asp:ListItem>Married</asp:ListItem>
+                    <asp:ListItem>Divorced</asp:ListItem>
+                    <asp:ListItem>Widowed</asp:ListItem>
+                </asp:DropDownList>
+                <asp:Label ID="Label2" runat="server" Text="Drivers Lic#: "></asp:Label>
+                <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label3" runat="server" Text="Employer Name and Address: "></asp:Label>
+                <asp:TextBox ID="txtEmployer" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="fieldValidatorEmployer" runat="server" ErrorMessage="Please enter employer and address" ControlToValidate="txtEmployer" CssClass="errorVal"></asp:RequiredFieldValidator>
+            </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label4" runat="server" Text="Work Phone#: "></asp:Label>
+                <asp:TextBox ID="txtWorkPhone" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ErrorMessage="Invalid Phone Number" ControlToValidate="txtWorkPhone" CssClass="errorVal" ValidationExpression="d{3}-d{3}-d{4}"></asp:RegularExpressionValidator>
+
+                <asp:Label ID="Label5" runat="server" Text="E-mail Address: "></asp:Label>
+                <asp:TextBox ID="txtEmail" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="regValidatorEmail" runat="server" ErrorMessage="Invalid Email Format" CssClass="errorVal" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+            
+            </div>
+
+            <div class ="margin_top">
+
+                <asp:Label ID="Label6" runat="server" Text="Cell Phone #: "></asp:Label>
+                <asp:TextBox ID="txtCellPhone" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ErrorMessage="Invalid Phone Number" ControlToValidate="txtCellPhone" CssClass="errorVal" ValidationExpression="d{3}-d{3}-d{4}"></asp:RegularExpressionValidator>
+
+                <asp:Label ID="Label7" runat="server" Text="Emergency Contact Name: "></asp:Label>
+                <asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label8" runat="server" Text="Emerg Phone# "> </asp:Label><asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+            </div>
+
+        </div> <!--box1 div-->
+
+        <div>
+            <asp:Label ID="Label9" runat="server" Text="Please tell us how you heard about us: " Font-Italic="True" style="margin-left:215px"></asp:Label>
+            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
+
+            <asp:Label ID="Label10" runat="server" Text="Referred by: " Font-Italic="True" style="margin-left:245px"></asp:Label>
+            <asp:TextBox ID="TextBox7" runat="server"></asp:TextBox>
+        </div>
+
+        <div class="box2">
+            <div>
+                <asp:Label ID="Label11" runat="server" Text="GUARANTOR INFORMATION: (List person or insured name responsible for bill - use full legal name, no nicknames)"></asp:Label>
+            </div>
+            <div class ="margin_top">
+                <asp:Label ID="Label12" runat="server" Text="Relationship of Guarantor to Patient: "></asp:Label>
+                <asp:DropDownList ID="dllGuarantor" runat="server">
+                    <asp:ListItem>Spouse</asp:ListItem>
+                    <asp:ListItem>Parent</asp:ListItem>
+                    <asp:ListItem>Other</asp:ListItem>
+                </asp:DropDownList>
+
+                <asp:Label ID="Label13" runat="server" Text="Other: "></asp:Label>
+                <asp:TextBox ID="txtGuarantor" runat="server"></asp:TextBox>
+            </div>
+            <div class="margin_top">
+                <asp:Label ID="Label14" runat="server" Text="Last Name: "></asp:Label>
+                <asp:TextBox ID="txtLastName2" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="fieldValLastName" runat="server" ErrorMessage="Please enter last name" CssClass="errorVal" ControlToValidate="txtLastName2"></asp:RequiredFieldValidator>
+            
+                <asp:Label ID="Label15" runat="server" Text="First Name: "></asp:Label>
+                <asp:TextBox ID="txtFirstName2" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="fieldValFirstName" runat="server" ErrorMessage="Please enter first name" CssClass="errorVal" ControlToValidate="txtFirstName2"></asp:RequiredFieldValidator>
+            
+                <asp:Label runat="server" Text="Middle Initial: " />
+                <asp:TextBox ID="TextBox00" runat="server"></asp:TextBox>
+            </div>
+            <div class="margin_top">
+                <asp:Label runat="server" Text="Address: "/>
+                <asp:TextBox ID="txtAddress2" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="fieldValAddress" runat="server" ControlToValidate="txtAddress2" CssClass="errorVal" ErrorMessage="Please enter address"></asp:RequiredFieldValidator>            
+            
+                <asp:Label runat="server" Text="City: "/>
+                <asp:TextBox ID="txtCity2" runat="server"></asp:TextBox>
+
+                <asp:Label runat="server" Text="State: " style="margin-left:20px"/>
+                <asp:TextBox ID="txtState2" runat="server"></asp:TextBox>
+
+                <asp:Label runat="server" Text="Zip: "/>
+                <asp:TextBox ID="txtZip2" runat="server"></asp:TextBox>
+            </div>
+
+            <div class="margin_top">
+                <asp:Label runat="server" Text="Home Phone #: "/>
+                <asp:TextBox ID="txtHomePhone2" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="regValHomePhone2" runat="server" ErrorMessage="Invalid Phone Number" ControlToValidate="txtHomePhone2" CssClass="errorVal" ValidationExpression="d{3}-d{3}-d{4}"></asp:RegularExpressionValidator>
+            
+                <asp:Label runat="server" Text="Social Security #: "/>
+                <asp:TextBox ID="txtSocial2" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="regValSocial2" runat="server" ErrorMessage="Invalid Social Number" ControlToValidate="txtSocial2" CssClass="errorVal" ValidationExpression="d{3}-d{2}-d{4}"></asp:RegularExpressionValidator>
+
+            </div>        
+
+            <div class="margin_top">
+                <asp:Label Text="Date of Birth: " runat="server"/>
+                <asp:TextBox ID="txtBirth2" runat="server" TextMode="Date"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="errorVal" Display="Dynamic" ErrorMessage="Please enter date" ControlToValidate="txtBirth2"></asp:RequiredFieldValidator>
+                <asp:CustomValidator ID="CustomValidator2" runat="server" ControlToValidate="txtBirth2" Display="Dynamic" ErrorMessage="Invalid Date" CssClass="errorVal" OnServerValidate="CustomValidator2_ServerValidate" CausesValidation="True"></asp:CustomValidator>
+
+                <asp:Label Text="Age: " runat="server"/>
+                <asp:TextBox ID="txtAge2" runat="server"></asp:TextBox>
+
+                <asp:Label Text="Sex: " runat="server"/>
+                <asp:DropDownList ID="ddlSex2" runat="server">
+                    <asp:ListItem>-</asp:ListItem>
+                    <asp:ListItem>M</asp:ListItem>
+                    <asp:ListItem>F</asp:ListItem>
+                    </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="ddlSex2" CssClass="errorVal" ErrorMessage="Please enter sex" InitialValue="-"></asp:RequiredFieldValidator>            
+            </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label16" runat="server" Text="Employer Name and Address: "></asp:Label>
+                <asp:TextBox ID="txtEmployerNA" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqValEmployer" runat="server" ErrorMessage="Please enter employer's name and address" ControlToValidate="txtEmployerNA" CssClass="errorVal"></asp:RequiredFieldValidator>
+           
+                <asp:Label ID="Label17" runat="server" Text="Work Phone #: "></asp:Label>
+                <asp:TextBox ID="txtWorkPhone2" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ErrorMessage="Invalid Format" ControlToValidate="txtWorkPhone2" CssClass="errorVal" ValidationExpression="d{3}-d{3}-d{4}"></asp:RegularExpressionValidator>
+            </div>
+
+        </div> <!--box2 div-->
+
+        <div class="box3">
+
+            <div class="margin_top">
+                <asp:Label ID="Label18" runat="server" Text="INSURANCE INFORMATION: (Please allow receptionist to photocopy your insurance ID cards)"></asp:Label>
+            </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label20" runat="server" Text="IF SOMEONE OTHER THAN PATIENT IS THE INSURED PARTY, PLEASE INCLUDE DATE OF BIRTH FOR CLAIMS" Font-Bold="True" Font-Italic="True" Font-Underline="True" style="margin-left:55px;margin-top:20px;font-size:small"></asp:Label>
+            </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label21" runat="server" Text="PRIMARY INSURANCE:" Font-Bold="True"></asp:Label>
+            </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label19" runat="server" Text="Plan Name: "></asp:Label>
+                <asp:TextBox ID="txtPlanName" runat="server"></asp:TextBox>
+
+                <asp:Label ID="Label22" runat="server" Text="Insured's Name: "></asp:Label>
+                <asp:TextBox ID="txtInsuredName" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="fieldValInsuredName" runat="server" ErrorMessage="Please enter insured's name" CssClass="errorVal" ControlToValidate="txtInsuredName"></asp:RequiredFieldValidator>
+            </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label23" runat="server" Text="Insured's Social Security #: "></asp:Label>
+                <asp:TextBox ID="txtInsuredSocial" runat="server"></asp:TextBox>
+                <asp:RegularExpressionValidator ID="regValInsuredSocial" runat="server" ErrorMessage="Invalid Social Number" CssClass="errorVal" ControlToValidate="txtInsuredSocial" ValidationExpression="d{3}-d{2}-d{4}"></asp:RegularExpressionValidator>
+                
+                <asp:Label ID="Label24" runat="server" Text="Insured's Date of Birth #: "></asp:Label>
+                <asp:TextBox ID="txtInsuredBirth" runat="server" TextMode="Date"></asp:TextBox>
+           
+                <asp:RequiredFieldValidator ID="fieldValInsuredDateOfBirth" runat="server" ErrorMessage="Please enter date of birth" CssClass="errorVal" Display="Dynamic" ControlToValidate="txtInsuredBirth"></asp:RequiredFieldValidator>
+                <asp:CustomValidator ID="CustomValidator3" runat="server" ErrorMessage="Invalid Date" CssClass="errorVal" CausesValidation="True" Display="Dynamic" OnServerValidate="CustomValidator3_ServerValidate"></asp:CustomValidator>
+                </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label25" runat="server" Text="Policy / ID #: "></asp:Label>
+                <asp:TextBox ID="txtPolicyID" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqValPolicyID" runat="server" ErrorMessage="Please enter policy or ID number" CssClass="errorVal" ControlToValidate="txtPolicyID"></asp:RequiredFieldValidator>
+
+                <asp:Label ID="Label26" runat="server" Text="Group #: "></asp:Label>
+                <asp:TextBox ID="txtGroup" runat="server"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqValGroup" runat="server" ErrorMessage="Please enter group number" CssClass="errorVal" ControlToValidate="txtGroup"></asp:RequiredFieldValidator>
+                </div>
+
+            <div class="margin_top">
+                <asp:Label ID="Label27" runat="server" Text="Eff Date: "></asp:Label>
+                <asp:TextBox ID="txtEffDate" runat="server" TextMode="Date"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="reqFieldEffDate" runat="server" ErrorMessage="Please enter effective date" ControlToValidate="txtEffDate" CssClass="errorVal"></asp:RequiredFieldValidator>
+            </div>
+        </div> <!--box3 div-->
+
+        <div>
+            <asp:Label ID="lblRegistration" runat="server" Text="" style="margin-left:210px" ForeColor="Lime" Font-Size="Large"></asp:Label>
+
+        </div>
+
+        <div> <!--button div-->
+            <asp:Button ID="btnSubmit" runat="server" Text="Submit" style="margin-left:700px; margin-bottom:40px" Height="25" Width="100" OnClick="btnSubmit_Click"/>
+        </div>
+    </form>
+</body>
+</html>
