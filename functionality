@@ -1,0 +1,103 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+namespace Assignment2
+{
+    public partial class WebForm1 : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
+        }
+
+
+        protected void CustomValidator1_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string s = txtBirth.Text;
+            DateTime date_chosen = DateTime.ParseExact(s, "yyyy-MM-dd",System.Globalization.CultureInfo.InvariantCulture);
+
+            DateTime date_now = DateTime.Now;
+
+            int result = DateTime.Compare(date_chosen, date_now);
+
+            if (result < 0)
+            {
+                args.IsValid = true;
+            }
+            else if (result == 0)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+
+                if (IsValid)
+                {
+                    lblRegistration.Text = "Successfully Registered!";
+                }
+                else
+                {
+                    lblRegistration.Text = "";
+                }
+            }
+
+        protected void CustomValidator2_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string a = txtBirth2.Text;
+            DateTime date_chosen2 = DateTime.ParseExact(a, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+            DateTime date_now2 = DateTime.Now;
+
+            int result2 = DateTime.Compare(date_chosen2, date_now2);
+
+            if (result2 < 0)
+            {
+                args.IsValid = true;
+            }
+            else if (result2 == 0)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+
+        }
+
+        protected void CustomValidator3_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            string b = txtInsuredBirth.Text;
+            DateTime date_chosen3 = DateTime.ParseExact(b, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
+
+            DateTime date_now3 = DateTime.Now;
+
+            int result3 = DateTime.Compare(date_chosen3, date_now3);
+
+            if (result3 < 0)
+            {
+                args.IsValid = true;
+            }
+            else if (result3 == 0)
+            {
+                args.IsValid = false;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+
+
+        }
+    }
+    }
